@@ -25,9 +25,4 @@ public class LoginApi extends AbstractCoreApi {
     public ResultVO login(@Valid @RequestBody CoreUser coreUser, @RequestParam String validataCode) {
         return new ResultVO(true);
     }
-
-    @PostMapping("test")
-    public ResultVO test (){
-        return new ResultVO(true);
-    }
 }

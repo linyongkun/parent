@@ -1,13 +1,10 @@
-package com.pineapple.client.core.api;
+package com.pineapple.client.core.client;
 
 import com.pineapple.base.core.vo.ResultVO;
-import com.pineapple.client.core.api.hystric.CoreLoginClientHystric;
+import com.pineapple.client.core.client.hystric.CoreLoginClientHystric;
 import com.pineapple.module.core.entity.CoreUser;
-import feign.Headers;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 /**
  * module name :
@@ -18,7 +15,4 @@ public interface CoreLoginClient {
 
     @PostMapping(value = "/login/login", consumes = "application/json")
     ResultVO login(@RequestBody CoreUser coreUser, @RequestParam("validataCode") String validataCode);
-
-    @PostMapping(value = "/login/test", consumes = "application/json")
-    ResultVO test();
 }
