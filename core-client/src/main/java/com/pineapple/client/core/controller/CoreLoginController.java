@@ -14,7 +14,7 @@ import javax.validation.Valid;
  * Created by lyk on 2019/1/3.
  */
 @RestController
-@RequestMapping("login")
+@RequestMapping("coreLogin")
 public class CoreLoginController extends CoreController {
 
     @Autowired
@@ -23,7 +23,6 @@ public class CoreLoginController extends CoreController {
     @PostMapping("login")
     // @ModelAttribute -可以从隐含对象中获取隐含的模型数据中获取对象，再将请求参数 –  绑定到对象中，再传入入参  -将方法入参对象添加到模型中 –
     public ResultVO login(@Valid @ModelAttribute CoreUser coreUser, @RequestParam String validataCode) {
-        ResultVO login = coreLoginClient.login(coreUser, validataCode);
-        return login;
+        return coreLoginClient.login(coreUser, validataCode);
     }
 }

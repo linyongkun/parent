@@ -1,6 +1,9 @@
 package com.pineapple.base.core.vo;
 
+import com.pineapple.base.core.constant.ResultVOConstant;
+
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,6 +33,13 @@ public class ResultVO<T> implements Serializable {
 
     public ResultVO(boolean status) {
         this.status = status;
+    }
+
+    public ResultVO(boolean status, String errDesc) {
+        this.status = status;
+        errMessage = new HashMap<>();
+        errMessage.put(ResultVOConstant.CODE_KEY, ResultVOConstant.CUSTOM);
+        errMessage.put(ResultVOConstant.DESC_KEY, errDesc);
     }
 
     public ResultVO(boolean status, T module) {

@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(value = "core-service", fallback = CoreLoginClientHystric.class)
 public interface CoreLoginClient {
 
-    @PostMapping(value = "/login/login", consumes = "application/json")
+    @PostMapping(value = "/coreLogin/login", consumes = "application/json")
     ResultVO login(@RequestBody CoreUser coreUser, @RequestParam("validataCode") String validataCode);
 }
