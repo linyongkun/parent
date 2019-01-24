@@ -35,16 +35,19 @@ public class ResultVO<T> implements Serializable {
         this.status = status;
     }
 
-    public ResultVO(boolean status, String errDesc) {
-        this.status = status;
-        errMessage = new HashMap<>();
-        errMessage.put(ResultVOConstant.CODE_KEY, ResultVOConstant.CUSTOM);
-        errMessage.put(ResultVOConstant.DESC_KEY, errDesc);
-    }
-
     public ResultVO(boolean status, T module) {
         this.status = status;
         this.module = module;
+    }
+
+    public ResultVO(boolean status, String errDesc) {
+        this.status = status;
+        if (status) {
+            return;
+        }
+        errMessage = new HashMap<>();
+        errMessage.put(ResultVOConstant.CODE_KEY, ResultVOConstant.CUSTOM);
+        errMessage.put(ResultVOConstant.DESC_KEY, errDesc);
     }
 
     public ResultVO(boolean status, Map<String, Object> errMessage) {

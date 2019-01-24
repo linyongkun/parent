@@ -26,8 +26,8 @@ import javax.validation.Valid;
 @RequestMapping("coreLogin")
 public class CoreLoginApi extends AbstractCoreApi {
 
-//    @Autowired
-//    private CoreLoginService coreLoginService;
+    @Autowired
+    private CoreLoginService coreLoginService;
 
     @Autowired
     private StringRedisTemplate template;
@@ -37,11 +37,12 @@ public class CoreLoginApi extends AbstractCoreApi {
     // @ModelAttribute -可以从隐含对象中获取隐含的模型数据中获取对象，再将请求参数 –  绑定到对象中，再传入入参  -将方法入参对象添加到模型中 –
     public ResultVO login(@Valid @RequestBody CoreUser coreUser, @RequestParam String validataCode) {
         String sessionId = request.getSession().getId();
+        template.opsForValue().set(sessionId, validataCode);
         String sessionCode = template.opsForValue().get(sessionId);
         if (!validataCode.equals(sessionCode)) {
             return new ResultVO(false, "验证码错误");
         }
-//        coreLoginService.login(coreUser);
-        return new ResultVO(true);
+        boolean flag = coreLoginService.login(coreUser);
+        return new ResultVO(flag, flag ? "登陆失败" : null);
     }
 }
